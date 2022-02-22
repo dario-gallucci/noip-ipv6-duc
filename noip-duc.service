@@ -10,6 +10,7 @@ ExecStart=/bin/bash /usr/local/bin/noip-ducv6.sh
 Restart=always
 RestartPreventExitStatus=1
 RestartSec=5min
+User=daemon
 
 [Install]
 WantedBy=multi-user.target

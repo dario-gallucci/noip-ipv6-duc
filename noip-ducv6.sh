@@ -10,6 +10,8 @@ agent="Personal noip-ducv6/linux-v1.0"
 
 lastaddr=''
 
+source /etc/noip-ducv6.conf
+
 update_ip () {
     addr=$(ip -6 addr show dev $interface | sed -e'/inet6/,/scope global/s/^.*inet6 \([^ ]*\)\/.*scope global.*$/\1/;t;d')
     if [[ $lastaddr != $addr ]]; then
