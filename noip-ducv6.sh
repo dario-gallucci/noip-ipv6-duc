@@ -1,16 +1,33 @@
 #!/bin/bash
 
-interface="INTERFACE e.g. enp3s0"
-user="EMAIL"
-pass="PASSWORD"
-hostname="HOSTNAME"
+if [ -z "$hostname" ]; then
+	logger "missing hostname"
+	exit 1
+fi
 
+if [ -z "$user" ]; then
+	logger "missing user"
+	exit 2
+fi
+
+if [ -z "$pass" ]; then
+	logger "missing pass"
+	exit3
+fi
+
+if [ -z "$interface" ]; then
+	interface="eth0"
+fi
+
+if [ -z "$url" ]; then
 url="https://dynupdate.no-ip.com/nic/update"
+fi
+
+if [ -z "$agent"]; then
 agent="Personal noip-ducv6/linux-v1.0"
+fi
 
 lastaddr=''
-
-source /etc/noip-ducv6.conf
 
 update_ip () {
     addr=$(ip -6 addr show dev $interface | sed -e'/inet6/,/scope global/s/^.*inet6 \([^ ]*\)\/.*scope global.*$/\1/;t;d')
